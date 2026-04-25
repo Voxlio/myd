@@ -18,7 +18,6 @@
             --accent: #f59e0b;
             --logo-blue: #1e3a8a;
             --logo-gold: #eab308;
-            /* Logo Palette */
             --logo-red: #dc2626;
             --logo-green: #16a34a;
             --logo-yellow: #facc15;
@@ -112,9 +111,8 @@
             transition: transform 0.3s ease;
         }
 
-        /* Modernized Login Page Theming */
         .login-card {
-            background: linear-gradient(145deg, #166534, #14532d); /* Deep Green from Logo palette */
+            background: linear-gradient(145deg, #166534, #14532d);
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
@@ -155,79 +153,78 @@
             box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
             transform: translateY(-2px);
         }
+        
+        .hidden-auth { display: none; }
     </style>
 </head>
 <body class="min-h-screen overflow-x-hidden">
 
     <!-- Login Overlay -->
     <div id="login-page" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950">
-        <!-- Abstract Background Shapes -->
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
             <div class="absolute -top-24 -left-24 w-96 h-96 bg-[#16a34a] rounded-full blur-[120px]"></div>
             <div class="absolute top-1/2 -right-24 w-80 h-80 bg-[#dc2626] rounded-full blur-[100px]"></div>
         </div>
 
-        <div class="login-card p-10 md:p-12 rounded-[3.5rem] w-full max-w-md transform transition-all relative z-10">
-            <div class="text-center mb-10">
-                <div class="inline-flex mb-8 shadow-2xl rounded-full p-1 bg-white border-4 border-[#facc15]/30 transform hover:rotate-6 transition-transform duration-500">
+        <div class="login-card p-10 md:p-12 rounded-[3.5rem] w-full max-w-md transform transition-all relative z-10 mx-4">
+            <div class="text-center mb-8">
+                <div class="inline-flex mb-6 shadow-2xl rounded-full p-1 bg-white border-4 border-[#facc15]/30 transform hover:rotate-6 transition-transform duration-500">
                     <img src="https://scontent-los4-1.xx.fbcdn.net/v/t39.30808-1/470239024_446230785207752_4513787542505772452_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=106&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=Muril85GxBsQ7kNvwFWCn5T&_nc_oc=AdqBfSOJLpSRgfhIax8BrTWPKFE4Z9ztN5DvPV3JlKvcirA1QLbD-d-YW-95k_4hl3kYa7YWf4X3wz-NSUnSJT8n&_nc_zt=24&_nc_ht=scontent-los4-1.xx&_nc_gid=Tx4tkxwgB7qunPrAmNZeNg&_nc_ss=78289&oh=00_Af23bW-RJuYAwzzsngIr1HuJazf009-rGpb3ESyh8moOvg&oe=69F1E633" 
                          alt="Ministry Logo" 
-                         class="w-24 h-24 rounded-full object-cover"
+                         class="w-20 h-20 rounded-full object-cover"
                          onerror="this.src='https://ui-avatars.com/api/?name=PPA&background=16a34a&color=fff'">
                 </div>
                 
-                <h1 class="text-3xl font-black tracking-tighter text-white uppercase leading-tight">
+                <h1 id="auth-title" class="text-2xl md:text-3xl font-black tracking-tighter text-white uppercase leading-tight">
                     Youth Development <br>
                     <span class="text-[#facc15]">Ministry Portal</span>
                 </h1>
-                <div class="h-1 w-12 bg-[#dc2626] mx-auto mt-4 rounded-full"></div>
-                <p class="text-white/60 mt-4 font-bold tracking-widest text-[10px] uppercase">Official PPA Workforce Interface</p>
+                <p id="auth-subtitle" class="text-white/60 mt-4 font-bold tracking-widest text-[10px] uppercase">Personal Access Portal</p>
             </div>
             
-            <form id="login-form" class="space-y-6">
-                <div class="space-y-2">
-                    <label class="login-label ml-1">Administrative Identity</label>
+            <form id="auth-form" class="space-y-4">
+                <div id="name-field" class="space-y-2 hidden-auth">
+                    <label class="login-label ml-1">Full Name</label>
                     <div class="relative group">
-                        <i data-lucide="shield-check" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#facc15]/60 group-focus-within:text-[#facc15] transition-colors"></i>
-                        <input type="text" id="username" required placeholder="Enter username" class="login-input w-full pl-12 pr-4 py-4 rounded-[1.5rem] outline-none font-bold text-sm" value="admin">
+                        <i data-lucide="user" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#facc15]/60 group-focus-within:text-[#facc15] transition-colors"></i>
+                        <input type="text" id="full-name" placeholder="Firstname Lastname" class="login-input w-full pl-12 pr-4 py-4 rounded-[1.5rem] outline-none font-bold text-sm">
                     </div>
                 </div>
+
+                <div class="space-y-2">
+                    <label class="login-label ml-1">State Code</label>
+                    <div class="relative group">
+                        <i data-lucide="shield-check" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#facc15]/60 group-focus-within:text-[#facc15] transition-colors"></i>
+                        <input type="text" id="state-code" required placeholder="e.g. AK/24B/1234" class="login-input w-full pl-12 pr-4 py-4 rounded-[1.5rem] outline-none font-bold text-sm">
+                    </div>
+                </div>
+
                 <div class="space-y-2">
                     <label class="login-label ml-1">Secure Passkey</label>
                     <div class="relative group">
                         <i data-lucide="fingerprint" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#facc15]/60 group-focus-within:text-[#facc15] transition-colors"></i>
-                        <input type="password" id="password" required placeholder="••••••••" class="login-input w-full pl-12 pr-4 py-4 rounded-[1.5rem] outline-none font-bold text-sm" value="12345">
+                        <input type="password" id="password" required placeholder="••••••••" class="login-input w-full pl-12 pr-4 py-4 rounded-[1.5rem] outline-none font-bold text-sm">
                     </div>
                 </div>
                 
-                <button type="submit" class="glow-button w-full py-5 bg-[#dc2626] hover:bg-[#b91c1c] text-white rounded-[1.5rem] font-black uppercase tracking-[0.2em] text-xs shadow-xl shadow-red-950/20 active:scale-95 flex items-center justify-center gap-3 mt-4">
-                    Authenticate Session <i data-lucide="arrow-right-circle" class="w-4 h-4"></i>
+                <button type="submit" id="auth-submit-btn" class="glow-button w-full py-5 bg-[#dc2626] hover:bg-[#b91c1c] text-white rounded-[1.5rem] font-black uppercase tracking-[0.2em] text-xs shadow-xl shadow-red-950/20 active:scale-95 flex items-center justify-center gap-3 mt-4">
+                    <span>Authenticate Session</span> <i data-lucide="arrow-right-circle" class="w-4 h-4"></i>
                 </button>
             </form>
-            
-            <div class="mt-12 flex justify-center items-center gap-6">
-                <span class="h-px w-8 bg-white/10"></span>
-                <div class="flex gap-4 text-white/20">
-                    <i class="bi bi-safe2 text-xl"></i>
-                    <i class="bi bi-shield-lock text-xl"></i>
-                    <i class="bi bi-key text-xl"></i>
-                </div>
-                <span class="h-px w-8 bg-white/10"></span>
-            </div>
-            
-            <div class="text-center mt-6">
-                <p class="text-[9px] font-bold text-white/30 uppercase tracking-[0.2em]">© 2026 MINISTRY OF YOUTH DEVELOPMENT</p>
+
+            <div class="mt-6 text-center">
+                <button id="toggle-auth" class="text-[10px] text-white/50 hover:text-white uppercase font-black tracking-widest transition-colors">
+                    New User? Create Account
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Mobile Sidebar Overlay -->
+    <!-- Sidebar Overlay -->
     <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-slate-950/50 backdrop-blur-sm z-40 hidden md:hidden no-print"></div>
 
     <!-- Main Dashboard Application -->
     <div id="main-app" class="hidden flex h-screen overflow-hidden">
-        
-        <!-- Sidebar -->
         <aside id="sidebar" class="w-72 glass fixed inset-y-0 left-0 z-50 transform -translate-x-full md:translate-x-0 md:relative md:flex flex-col border-r border-gray-200/50 dark:border-slate-800/50 no-print transition-transform duration-300">
             <div class="p-8">
                 <div class="flex items-center justify-between mb-12">
@@ -238,13 +235,11 @@
                                  class="w-full h-full object-cover">
                         </div>
                         <div>
-                            <span class="font-extrabold text-xl tracking-tight block">PPA Admin</span>
-                            <span class="text-[10px] uppercase tracking-widest text-blue-500 font-bold">Workforce Portal</span>
+                            <span class="font-extrabold text-xl tracking-tight block">PPA Portal</span>
+                            <span class="text-[10px] uppercase tracking-widest text-blue-500 font-bold">Workforce Interface</span>
                         </div>
                     </div>
-                    <button onclick="toggleSidebar()" class="md:hidden p-2 text-gray-400 hover:text-red-500">
-                        <i data-lucide="x"></i>
-                    </button>
+                    <button onclick="toggleSidebar()" class="md:hidden p-2 text-gray-400"><i data-lucide="x"></i></button>
                 </div>
                 
                 <nav class="space-y-3">
@@ -264,33 +259,23 @@
             </div>
 
             <div class="mt-auto p-8">
-                <div class="p-4 bg-blue-50 dark:bg-blue-900/10 rounded-2xl mb-6">
-                    <p class="text-xs text-blue-600 dark:text-blue-400 font-bold mb-1">SUPPORT</p>
-                    <p class="text-[11px] text-gray-500 dark:text-gray-400">Need help with CDS logs?</p>
-                    <button class="mt-2 text-xs font-bold text-blue-600 underline">Contact IT</button>
-                </div>
-                <button onclick="logout()" class="w-full flex items-center gap-4 p-4 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 rounded-2xl transition-all font-semibold">
+                <button onclick="handleLogout()" class="w-full flex items-center gap-4 p-4 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 rounded-2xl transition-all font-semibold">
                     <i data-lucide="log-out" class="w-5 h-5"></i> Logout
                 </button>
             </div>
         </aside>
 
-        <!-- Main Content -->
         <main class="flex-1 flex flex-col overflow-hidden relative">
-            
-            <!-- Top Header -->
             <header class="glass h-20 flex items-center justify-between px-6 md:px-10 border-b border-gray-200/50 dark:border-slate-800/50 no-print">
                 <div class="flex items-center gap-4">
-                    <button onclick="toggleSidebar()" class="md:hidden p-2 text-gray-600 dark:text-gray-300">
-                        <i data-lucide="menu"></i>
-                    </button>
+                    <button onclick="toggleSidebar()" class="md:hidden p-2 text-gray-600 dark:text-gray-300"><i data-lucide="menu"></i></button>
                     <h2 id="page-title" class="font-bold text-xl md:text-2xl tracking-tight">Overview</h2>
                 </div>
                 
                 <div class="flex items-center gap-4 md:gap-8">
                     <div class="hidden md:flex flex-col text-right border-r pr-8 border-gray-200 dark:border-slate-800">
                         <span id="live-clock" class="font-mono font-bold text-xl text-blue-600">00:00:00</span>
-                        <span id="live-date" class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Loading date...</span>
+                        <span id="live-date" class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">...</span>
                     </div>
                     <div class="flex items-center gap-4">
                         <button onclick="toggleDarkMode()" class="p-3 rounded-xl bg-gray-100 dark:bg-slate-800 hover:scale-110 transition-transform">
@@ -298,115 +283,61 @@
                         </button>
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/20">
-                                AD
+                                <span id="user-initials">U</span>
                             </div>
                             <div class="hidden lg:block">
-                                <p class="text-xs font-bold leading-none">Administrator</p>
-                                <p class="text-[10px] text-gray-400 font-medium">Head of PPA</p>
+                                <p id="user-display-name" class="text-xs font-bold leading-none">Loading...</p>
+                                <p id="user-display-id" class="text-[10px] text-gray-400 font-medium">Please wait</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </header>
 
-            <!-- Scrollable Content Area -->
             <div id="content-container" class="flex-1 overflow-y-auto p-4 md:p-10 custom-scrollbar">
-                
                 <!-- Page: Dashboard -->
                 <section id="page-dashboard" class="space-y-8">
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
                         <div class="stat-card glass p-6 md:p-8 rounded-[2rem] border-b-4 border-blue-500">
                             <div class="flex justify-between items-start">
-                                <div>
-                                    <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Total Corps</p>
-                                    <h3 class="text-3xl md:text-4xl font-extrabold tracking-tighter" id="stat-total">30</h3>
-                                </div>
-                                <div class="bg-blue-500/10 p-3 md:p-4 rounded-2xl text-blue-600">
-                                    <i data-lucide="users" class="w-5 h-5 md:w-6 md:h-6"></i>
-                                </div>
+                                <div><p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Total Corps</p><h3 class="text-3xl md:text-4xl font-extrabold tracking-tighter" id="stat-total">0</h3></div>
+                                <div class="bg-blue-500/10 p-3 md:p-4 rounded-2xl text-blue-600"><i data-lucide="users" class="w-5 h-5 md:w-6 md:h-6"></i></div>
                             </div>
                         </div>
                         <div class="stat-card glass p-6 md:p-8 rounded-[2rem] border-b-4 border-emerald-500">
                             <div class="flex justify-between items-start">
-                                <div>
-                                    <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">On Seat</p>
-                                    <h3 class="text-3xl md:text-4xl font-extrabold tracking-tighter" id="stat-present">0</h3>
-                                </div>
-                                <div class="bg-emerald-500/10 p-3 md:p-4 rounded-2xl text-emerald-600">
-                                    <i data-lucide="user-check" class="w-5 h-5 md:w-6 md:h-6"></i>
-                                </div>
+                                <div><p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">On Seat</p><h3 class="text-3xl md:text-4xl font-extrabold tracking-tighter" id="stat-present">0</h3></div>
+                                <div class="bg-emerald-500/10 p-3 md:p-4 rounded-2xl text-emerald-600"><i data-lucide="user-check" class="w-5 h-5 md:w-6 md:h-6"></i></div>
                             </div>
                         </div>
                         <div class="stat-card glass p-6 md:p-8 rounded-[2rem] border-b-4 border-amber-500">
                             <div class="flex justify-between items-start">
-                                <div>
-                                    <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Tardy</p>
-                                    <h3 class="text-3xl md:text-4xl font-extrabold tracking-tighter" id="stat-late">0</h3>
-                                </div>
-                                <div class="bg-amber-500/10 p-3 md:p-4 rounded-2xl text-amber-600">
-                                    <i data-lucide="clock" class="w-5 h-5 md:w-6 md:h-6"></i>
-                                </div>
+                                <div><p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Tardy</p><h3 class="text-3xl md:text-4xl font-extrabold tracking-tighter" id="stat-late">0</h3></div>
+                                <div class="bg-amber-500/10 p-3 md:p-4 rounded-2xl text-amber-600"><i data-lucide="clock" class="w-5 h-5 md:w-6 md:h-6"></i></div>
                             </div>
                         </div>
                         <div class="stat-card glass p-6 md:p-8 rounded-[2rem] border-b-4 border-rose-500">
                             <div class="flex justify-between items-start">
-                                <div>
-                                    <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Missing</p>
-                                    <h3 class="text-3xl md:text-4xl font-extrabold tracking-tighter" id="stat-absent">30</h3>
-                                </div>
-                                <div class="bg-rose-500/10 p-3 md:p-4 rounded-2xl text-rose-600">
-                                    <i data-lucide="user-x" class="w-5 h-5 md:w-6 md:h-6"></i>
-                                </div>
+                                <div><p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Missing</p><h3 class="text-3xl md:text-4xl font-extrabold tracking-tighter" id="stat-absent">0</h3></div>
+                                <div class="bg-rose-500/10 p-3 md:p-4 rounded-2xl text-rose-600"><i data-lucide="user-x" class="w-5 h-5 md:w-6 md:h-6"></i></div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <div class="lg:col-span-2 glass rounded-[2.5rem] p-6 md:p-8">
-                            <div class="flex justify-between items-center mb-8">
-                                <h4 class="font-extrabold text-xl">Attendance Pulse</h4>
-                                <div class="flex gap-2">
-                                    <div class="flex items-center gap-1 text-[10px] font-bold text-gray-400"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Present</div>
-                                    <div class="flex items-center gap-1 text-[10px] font-bold text-gray-400"><span class="w-2 h-2 rounded-full bg-rose-500"></span> Absent</div>
-                                </div>
-                            </div>
-                            <div class="h-64 flex items-end justify-between gap-2 sm:gap-6 px-4">
-                                <div class="w-full bg-blue-600/10 dark:bg-blue-900/20 rounded-2xl relative group" style="height: 60%"><div class="absolute inset-x-0 bottom-0 bg-blue-600 rounded-2xl h-1/2"></div></div>
-                                <div class="w-full bg-emerald-600/10 dark:bg-emerald-900/20 rounded-2xl relative" style="height: 85%"><div class="absolute inset-x-0 bottom-0 bg-emerald-600 rounded-2xl h-2/3"></div></div>
-                                <div class="w-full bg-blue-600/10 dark:bg-blue-900/20 rounded-2xl relative" style="height: 45%"><div class="absolute inset-x-0 bottom-0 bg-blue-600 rounded-2xl h-1/4"></div></div>
-                                <div class="w-full bg-amber-600/10 dark:bg-amber-900/20 rounded-2xl relative" style="height: 20%"><div class="absolute inset-x-0 bottom-0 bg-amber-600 rounded-2xl h-1/2"></div></div>
-                                <div class="w-full bg-blue-600/10 dark:bg-blue-900/20 rounded-2xl relative" style="height: 70%"><div class="absolute inset-x-0 bottom-0 bg-blue-600 rounded-2xl h-2/3"></div></div>
-                                <div class="w-full bg-emerald-600/10 dark:bg-emerald-900/20 rounded-2xl relative" style="height: 95%"><div class="absolute inset-x-0 bottom-0 bg-emerald-600 rounded-2xl h-4/5"></div></div>
-                            </div>
-                            <div class="flex justify-between mt-6 text-[10px] font-bold text-gray-400 uppercase tracking-widest px-4">
-                                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-                            </div>
-                        </div>
-                        <div class="glass rounded-[2.5rem] p-6 md:p-8">
-                            <h4 class="font-extrabold text-xl mb-6">Live Feed</h4>
-                            <div class="space-y-6" id="notifications-list">
-                                <div class="flex gap-4 p-4 bg-white dark:bg-slate-900/50 rounded-2xl border border-gray-100 dark:border-slate-800">
-                                    <div class="w-2 h-2 mt-1.5 rounded-full bg-blue-500 shadow-lg shadow-blue-500"></div>
-                                    <p class="text-sm leading-snug"><span class="font-bold">System:</span> Welcome, Portal active.</p>
-                                </div>
-                            </div>
+                    <div class="glass rounded-[2.5rem] p-6 md:p-8">
+                        <h4 class="font-extrabold text-xl mb-6">Recent Activities</h4>
+                        <div class="space-y-4" id="notifications-list">
+                            <div class="text-center py-8 text-gray-400 text-sm">No recent activity detected.</div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Page: Attendance List -->
                 <section id="page-attendance" class="hidden space-y-8">
                     <div class="glass p-6 md:p-8 rounded-[2.5rem] space-y-8">
-                        <div class="flex flex-col lg:row md:flex-row md:items-center justify-between gap-6">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                             <div class="relative w-full md:w-96">
                                 <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
-                                <input type="text" id="attendance-search" placeholder="Search names or IDs..." class="w-full pl-12 pr-4 py-4 rounded-[1.25rem] border border-gray-100 dark:bg-slate-900/50 dark:border-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition-all shadow-sm">
-                            </div>
-                            <div class="flex gap-2 overflow-x-auto pb-2 custom-scrollbar">
-                                <button onclick="filterAttendance('all', event)" class="whitespace-nowrap px-6 py-3 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 font-bold text-sm shadow-lg">All</button>
-                                <button onclick="filterAttendance('present', event)" class="whitespace-nowrap px-6 py-3 rounded-xl bg-white dark:bg-slate-800 text-gray-500 font-bold text-sm border hover:bg-emerald-50 hover:text-emerald-600 transition-all">Present</button>
-                                <button onclick="filterAttendance('late', event)" class="whitespace-nowrap px-6 py-3 rounded-xl bg-white dark:bg-slate-800 text-gray-500 font-bold text-sm border hover:bg-amber-50 hover:text-amber-600 transition-all">Late</button>
-                                <button onclick="filterAttendance('absent', event)" class="whitespace-nowrap px-6 py-3 rounded-xl bg-white dark:bg-slate-800 text-gray-500 font-bold text-sm border hover:bg-rose-50 hover:text-rose-600 transition-all">Absent</button>
+                                <input type="text" id="attendance-search" placeholder="Search registered corpers..." class="w-full pl-12 pr-4 py-4 rounded-[1.25rem] border border-gray-100 dark:bg-slate-900/50 dark:border-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition-all shadow-sm">
                             </div>
                         </div>
 
@@ -415,155 +346,387 @@
                                 <thead class="text-gray-400 text-[10px] font-bold uppercase tracking-widest border-b border-gray-100 dark:border-slate-800">
                                     <tr>
                                         <th class="py-5 px-6">Personnel</th>
-                                        <th class="py-5 px-6">Identity</th>
+                                        <th class="py-5 px-6">State Code</th>
                                         <th class="py-5 px-6">Status</th>
                                         <th class="py-5 px-6">Entry</th>
                                         <th class="py-5 px-6">Exit</th>
-                                        <th class="py-5 px-6 text-center">Operations</th>
+                                        <th class="py-5 px-6 text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="attendance-table-body" class="divide-y divide-gray-50 dark:divide-slate-900">
-                                    <!-- Dynamic Rows -->
+                                    <!-- Populated by Firebase -->
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </section>
 
-                <!-- Page: History -->
                 <section id="page-history" class="hidden space-y-8">
                     <div class="glass p-6 md:p-8 rounded-[2.5rem] space-y-6">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                            <div>
-                                <h3 class="font-extrabold text-2xl">Audit Trail</h3>
-                                <p class="text-gray-400 text-sm">Review past logs and verification artifacts.</p>
-                            </div>
-                            <div class="flex gap-3">
-                                <button onclick="exportToCSV()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 bg-emerald-600 text-white rounded-xl font-bold text-sm hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-500/20"><i data-lucide="file-spreadsheet" class="w-4 h-4"></i>CSV</button>
-                                <button onclick="window.print()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 bg-blue-600 text-white rounded-xl font-bold text-sm hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20"><i data-lucide="printer" class="w-4 h-4"></i>Print</button>
-                            </div>
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-extrabold text-2xl">Digital Registry Logs</h3>
+                            <button onclick="exportToCSV()" class="px-5 py-3 bg-emerald-600 text-white rounded-xl font-bold text-sm shadow-lg shadow-emerald-500/20">Export CSV</button>
                         </div>
                         <div class="overflow-x-auto rounded-3xl border border-gray-100 dark:border-slate-800">
                             <table class="w-full text-left" id="history-table">
                                 <thead class="bg-slate-50 dark:bg-slate-900/50 text-gray-400 text-[10px] font-bold uppercase tracking-widest">
                                     <tr>
-                                        <th class="py-4 px-6">Timestamp</th>
+                                        <th class="py-4 px-6">Date</th>
                                         <th class="py-4 px-6">Name</th>
-                                        <th class="py-4 px-6">Time In</th>
-                                        <th class="py-4 px-6">Time Out</th>
+                                        <th class="py-4 px-6">State Code</th>
+                                        <th class="py-4 px-6">In</th>
+                                        <th class="py-4 px-6">Out</th>
                                         <th class="py-4 px-6">Status</th>
-                                        <th class="py-4 px-6">Verification</th>
                                     </tr>
                                 </thead>
-                                <tbody id="history-table-body" class="text-sm">
-                                    <!-- Dynamic History -->
-                                </tbody>
+                                <tbody id="history-table-body" class="text-sm"></tbody>
                             </table>
                         </div>
                     </div>
                 </section>
-
             </div>
-
-            <!-- Footer -->
-            <footer class="h-14 glass border-t border-gray-200/50 dark:border-slate-800/50 flex items-center justify-center text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] no-print">
-                <i class="bi bi-patch-check-fill text-blue-500 mr-2"></i> Youth Development Ministry Attendance Portal &copy; 2026
-            </footer>
-
-            <!-- Biometric / Verification Modal -->
-            <div id="verify-modal" class="fixed inset-0 z-[110] hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4 md:p-6">
-                <div class="glass bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[3rem] overflow-hidden shadow-2xl flex flex-col md:flex-row border border-white/10 max-h-[90vh] overflow-y-auto custom-scrollbar">
-                    <div class="w-full md:w-1/2 p-6 md:p-10 bg-slate-50 dark:bg-slate-800/50 flex flex-col items-center">
-                        <h4 class="font-extrabold text-xl mb-6 text-blue-600 flex items-center gap-2">
-                            <i data-lucide="camera" class="w-5 h-5"></i> Facial Capture
-                        </h4>
-                        <div class="relative w-full aspect-square max-w-[280px] md:max-w-none bg-slate-950 rounded-[2rem] overflow-hidden mb-6 shadow-inner ring-4 ring-blue-500/10">
-                            <video id="webcam" autoplay playsinline class="w-full h-full object-cover scale-x-[-1]"></video>
-                            <canvas id="photo-canvas" class="hidden"></canvas>
-                            <img id="photo-preview" class="absolute inset-0 w-full h-full object-cover hidden">
-                            <div id="wrong-identity-tag" class="absolute top-4 left-4 bg-rose-600 text-white text-[10px] px-3 py-1.5 rounded-full hidden uppercase font-black tracking-widest shadow-lg">ID MISMATCH</div>
-                        </div>
-                        <button id="capture-btn" class="w-full py-4 bg-slate-900 dark:bg-white dark:text-slate-900 text-white rounded-2xl font-bold flex items-center justify-center gap-3 active:scale-95 transition-all">
-                            <i class="bi bi-camera-fill text-lg"></i> Take Snap
-                        </button>
-                    </div>
-                    <div class="w-full md:w-1/2 p-6 md:p-10 flex flex-col">
-                        <h4 class="font-extrabold text-xl mb-2">Authenticator</h4>
-                        <p class="text-xs text-gray-400 mb-8 font-medium italic">Please sign inside the field to authorize the timestamp.</p>
-                        <canvas id="signature-pad" class="w-full flex-1 min-h-[200px] rounded-[2rem]"></canvas>
-                        <div class="flex gap-3 mt-8">
-                            <button onclick="clearSignature()" class="flex-1 py-4 text-xs font-bold text-gray-500 bg-gray-100 dark:bg-slate-800 rounded-2xl hover:bg-gray-200 transition-all">Clear</button>
-                            <button onclick="confirmClockIn()" id="submit-verify" class="flex-[2] py-4 text-xs font-bold bg-blue-600 text-white rounded-2xl shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all">Validate Entry</button>
-                        </div>
-                        <button onclick="closeModal()" class="mt-6 text-xs font-bold text-gray-400 hover:text-rose-500 transition-colors">Discard Attempt</button>
-                    </div>
-                </div>
-            </div>
-
         </main>
+    </div>
+
+    <!-- Clock-in Modal -->
+    <div id="verify-modal" class="fixed inset-0 z-[110] hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[3rem] overflow-hidden shadow-2xl flex flex-col md:flex-row border border-white/10 max-h-[90vh] overflow-y-auto">
+            <div class="w-full md:w-1/2 p-6 md:p-10 bg-slate-50 dark:bg-slate-800/50 flex flex-col items-center">
+                <h4 class="font-extrabold text-xl mb-6 text-blue-600 flex items-center gap-2"><i data-lucide="camera" class="w-5 h-5"></i> Facial Capture</h4>
+                <div class="relative w-full aspect-square bg-slate-950 rounded-[2rem] overflow-hidden mb-6 ring-4 ring-blue-500/10">
+                    <video id="webcam" autoplay playsinline class="w-full h-full object-cover scale-x-[-1]"></video>
+                    <canvas id="photo-canvas" class="hidden"></canvas>
+                    <img id="photo-preview" class="absolute inset-0 w-full h-full object-cover hidden">
+                </div>
+                <button id="capture-btn" class="w-full py-4 bg-slate-900 dark:bg-white dark:text-slate-900 text-white rounded-2xl font-bold flex items-center justify-center gap-3">Take Snap</button>
+            </div>
+            <div class="w-full md:w-1/2 p-6 md:p-10 flex flex-col">
+                <h4 class="font-extrabold text-xl mb-2">Authenticator</h4>
+                <p class="text-xs text-gray-400 mb-8 italic">Sign to authorize your timestamp.</p>
+                <canvas id="signature-pad" class="w-full flex-1 min-h-[200px] rounded-[2rem] border"></canvas>
+                <div class="flex gap-3 mt-8">
+                    <button onclick="clearSignature()" class="flex-1 py-4 text-xs font-bold text-gray-500 bg-gray-100 rounded-2xl">Clear</button>
+                    <button id="submit-verify" onclick="submitAttendance()" class="flex-[2] py-4 text-xs font-bold bg-blue-600 text-white rounded-2xl shadow-lg">Validate Entry</button>
+                </div>
+                <button onclick="closeModal()" class="mt-6 text-xs font-bold text-gray-400">Cancel</button>
+            </div>
+        </div>
     </div>
 
     <!-- Toast Notification System -->
     <div id="toast-container" class="fixed bottom-10 right-10 z-[200] space-y-4 pointer-events-none"></div>
 
-    <script>
-        // Data & State Management
-        const CORPS_MEMBERS = [
-            "Esther Johnny", "Daniel Okafor", "Grace Michael", "Samuel Adeyemi", "Blessing James",
-            "Chinedu Obi", "Joy Williams", "David Musa", "Anita John", "Peter Kingsley",
-            "Ruth Emmanuel", "Miracle Joseph", "Favour Henry", "Ifeanyi Collins", "Janet Paul",
-            "Emmanuel Victor", "Vivian Daniel", "Caleb Andrew", "Mercy Jude", "Precious Simon",
-            "Francis Kelvin", "Deborah Isaac", "Philip Johnson", "Sandra Moses", "Cynthia Mark",
-            "Kingsley Paul", "Rebecca Samuel", "Joshua Bright", "Lydia Victor", "Michael Daniel"
-        ].map((name, index) => ({
-            id: `NYSC/PPA/2026/${(index + 1).toString().padStart(3, '0')}`,
-            name: name,
-            photo: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=random&color=fff&size=128`,
-            status: 'Absent',
-            timeIn: '--:--',
-            timeOut: '--:--'
-        }));
+    <!-- Firebase Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, query, getDocs, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        let attendanceState = JSON.parse(localStorage.getItem('ppa_attendance_v2')) || {
-            today: new Date().toLocaleDateString(),
-            records: [...CORPS_MEMBERS],
-            history: []
+        const firebaseConfig = {
+            apiKey: "AIzaSyDXnHIjTHMqcrA4NoFJVwlHXouk6yzphvw",
+            authDomain: "akmyd-6a8be.firebaseapp.com",
+            projectId: "akmyd-6a8be",
+            storageBucket: "akmyd-6a8be.firebasestorage.app",
+            messagingSenderId: "660159361347",
+            appId: "1:660159361347:web:7ae057c5a003defb55fff6",
+            measurementId: "G-SP1EQSBPYR"
         };
 
-        if (attendanceState.today !== new Date().toLocaleDateString()) {
-            attendanceState.history.push(...attendanceState.records.filter(r => r.status !== 'Absent').map(r => ({...r, date: attendanceState.today})));
-            attendanceState.records = [...CORPS_MEMBERS];
-            attendanceState.today = new Date().toLocaleDateString();
-            saveState();
-        }
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
 
-        let activeMemberId = null;
-        let videoStream = null;
-        let signatureCtx = null;
-        let isDrawing = false;
-        let capturedPhoto = null;
+        window.allUsers = [];
+        window.dailyAttendance = {};
+        const todayKey = new Date().toLocaleDateString('sv'); // YYYY-MM-DD
 
-        // UI Initialization
-        document.getElementById('login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            document.getElementById('login-page').classList.add('hidden');
-            document.getElementById('main-app').classList.remove('hidden');
-            initApp();
+        const authForm = document.getElementById('auth-form');
+        const toggleAuthBtn = document.getElementById('toggle-auth');
+        const nameField = document.getElementById('name-field');
+        const authTitle = document.getElementById('auth-title');
+        let isRegisterMode = false;
+
+        toggleAuthBtn.addEventListener('click', () => {
+            isRegisterMode = !isRegisterMode;
+            nameField.classList.toggle('hidden-auth');
+            document.querySelector('#auth-submit-btn span').innerText = isRegisterMode ? "Create Account" : "Authenticate Session";
+            authTitle.innerHTML = isRegisterMode ? "Portal <span class='text-[#facc15]'>Registration</span>" : "Youth Development <br> <span class='text-[#facc15]'>Ministry Portal</span>";
         });
 
-        function initApp() {
+        authForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fullName = document.getElementById('full-name').value;
+            const stateCode = document.getElementById('state-code').value.toUpperCase().trim();
+            const password = document.getElementById('password').value;
+            const email = `${stateCode.replace(/\//g, '_')}@ppa.portal`;
+
+            try {
+                if (isRegisterMode) {
+                    if (!fullName) throw new Error("Full Name is required.");
+                    const userCred = await createUserWithEmailAndPassword(auth, email, password);
+                    await setDoc(doc(db, "users", userCred.user.uid), { uid: userCred.user.uid, fullName, stateCode, createdAt: new Date().toISOString() });
+                    showToast("Registry Created!", "success");
+                } else {
+                    await signInWithEmailAndPassword(auth, email, password);
+                    showToast("Identity Verified.", "success");
+                }
+            } catch (err) { showToast(err.message, "error"); }
+        });
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                document.getElementById('login-page').classList.add('hidden');
+                document.getElementById('main-app').classList.remove('hidden');
+                
+                const uDoc = await getDoc(doc(db, "users", user.uid));
+                const userData = uDoc.data();
+                if(userData) {
+                    document.getElementById('user-display-name').innerText = userData.fullName;
+                    document.getElementById('user-display-id').innerText = userData.stateCode;
+                    document.getElementById('user-initials').innerText = userData.fullName.charAt(0);
+                }
+
+                onSnapshot(collection(db, "users"), (snap) => {
+                    window.allUsers = snap.docs.map(d => d.data());
+                    updateGlobalRegistry(user);
+                });
+
+                onSnapshot(collection(db, `attendance_${todayKey}`), (snap) => {
+                    window.dailyAttendance = {};
+                    snap.forEach(d => window.dailyAttendance[d.id] = d.data());
+                    updateGlobalRegistry(user);
+                });
+
+                initUI();
+            } else {
+                document.getElementById('login-page').classList.remove('hidden');
+                document.getElementById('main-app').classList.add('hidden');
+            }
+        });
+
+        function updateGlobalRegistry(currentUser) {
+            const users = window.allUsers;
+            const attend = window.dailyAttendance;
+            const searchQuery = document.getElementById('attendance-search')?.value.toLowerCase() || '';
+            
+            // Integrated updateStats Logic
+            const total = users.length;
+            const presentCount = Object.keys(attend).length;
+            const lateCount = Object.values(attend).filter(v => v.status === 'Late').length;
+            const absentCount = total - presentCount;
+
+            document.getElementById('stat-total').innerText = total;
+            document.getElementById('stat-present').innerText = presentCount;
+            document.getElementById('stat-late').innerText = lateCount;
+            document.getElementById('stat-absent').innerText = absentCount;
+
+            const tbody = document.getElementById('attendance-table-body');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+            
+            users.filter(u => {
+                return u.fullName.toLowerCase().includes(searchQuery) || u.stateCode.toLowerCase().includes(searchQuery);
+            }).forEach(u => {
+                const log = attend[u.uid];
+                const row = document.createElement('tr');
+                row.className = "hover:bg-slate-50/50 dark:hover:bg-slate-900/40 transition-all group";
+                
+                const status = log ? log.status : 'Absent';
+                let statusBadge = 'bg-slate-100 text-slate-500';
+                if (status === 'Present') statusBadge = 'bg-emerald-100 text-emerald-600 dark:bg-emerald-500/10';
+                if (status === 'Late') statusBadge = 'bg-amber-100 text-amber-600 dark:bg-amber-500/10';
+                
+                // Refined Action Logic (Corrected Scoping)
+                const isMe = currentUser && u.uid === currentUser.uid;
+                const cinDisabled = (!isMe || log) ? 'opacity-20 grayscale pointer-events-none' : 'text-emerald-500 hover:scale-125';
+                const coutDisabled = (!isMe || !log || log.timeOut) ? 'opacity-20 grayscale pointer-events-none' : 'text-rose-500 hover:scale-125';
+
+                row.innerHTML = `
+                    <td class="py-6 px-6 flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-600 font-bold border-2 border-white dark:border-slate-800 shadow-sm">
+                            ${u.fullName.charAt(0)}
+                        </div>
+                        <div>
+                            <span class="font-bold text-sm block">${u.fullName}</span>
+                            <span class="text-[10px] text-gray-400 font-medium">NYSC PPA</span>
+                        </div>
+                    </td>
+                    <td class="py-6 px-6 text-[11px] font-mono font-bold text-blue-500/60">${u.stateCode}</td>
+                    <td class="py-6 px-6">
+                        <span class="px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest ${statusBadge}">${status}</span>
+                    </td>
+                    <td class="py-6 px-6 text-xs font-mono font-bold">${log ? log.timeIn : '--:--'}</td>
+                    <td class="py-6 px-6 text-xs font-mono font-bold">${log && log.timeOut ? log.timeOut : '--:--'}</td>
+                    <td class="py-6 px-6 text-center">
+                        <div class="flex items-center justify-center gap-6">
+                            <button onclick="window.initiateClockIn('${u.uid}')" class="${cinDisabled} transition-all" title="Clock In">
+                                <i class="bi bi-box-arrow-in-right text-2xl"></i>
+                            </button>
+                            <button onclick="window.clockOut('${u.uid}')" class="${coutDisabled} transition-all" title="Clock Out">
+                                <i class="bi bi-box-arrow-right text-2xl"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            // Update History Table
+            const hBody = document.getElementById('history-table-body');
+            if(!hBody) return;
+            hBody.innerHTML = '';
+            users.forEach(u => {
+                const log = attend[u.uid];
+                if(log) {
+                    const hRow = document.createElement('tr');
+                    hRow.className = "border-b dark:border-slate-800 hover:bg-slate-50/50 dark:hover:bg-slate-900/40";
+                    hRow.innerHTML = `
+                        <td class="py-5 px-6 font-bold text-[10px] text-gray-400">${new Date().toLocaleDateString()}</td>
+                        <td class="py-5 px-6 font-bold text-sm">${u.fullName}</td>
+                        <td class="py-5 px-6 text-xs font-mono font-bold text-gray-400">${u.stateCode}</td>
+                        <td class="py-5 px-6 font-mono font-bold">${log.timeIn}</td>
+                        <td class="py-5 px-6 font-mono font-bold">${log.timeOut || '--:--'}</td>
+                        <td class="py-5 px-6"><span class="text-[9px] px-2 py-1 rounded-md font-black uppercase ${log.status === 'Late' ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'}">${log.status}</span></td>
+                    `;
+                    hBody.prepend(hRow);
+                }
+            });
+            lucide.createIcons();
+        }
+
+        // Globalized Scoped Actions
+        window.initiateClockIn = (id) => {
+            const modal = document.getElementById('verify-modal');
+            modal.classList.remove('hidden');
+            window.startCamera();
+            setTimeout(() => window.setupSignaturePad(), 200);
+        };
+
+        window.submitAttendance = async () => {
+            const p = document.getElementById('photo-preview');
+            if(p.classList.contains('hidden')) return showToast("Snap required for biometrics.", "error");
+
+            const photo = p.src;
+            const sig = document.getElementById('signature-pad').toDataURL();
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const isLate = (now.getHours() > 8 || (now.getHours() === 8 && now.getMinutes() > 30));
+
+            try {
+                await setDoc(doc(db, `attendance_${todayKey}`, auth.currentUser.uid), {
+                    id: auth.currentUser.uid, timeIn: timeStr, status: isLate ? 'Late' : 'Present', verification: { photo, sig }
+                });
+                showToast("Identity Log Verified.", "success");
+                window.closeModal();
+            } catch (err) { showToast("Sync error.", "error"); }
+        };
+
+        window.clockOut = async (id) => {
+            if(!confirm("Ready to clock out? Timestamp will be locked.")) return;
+            const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            try {
+                await updateDoc(doc(db, `attendance_${todayKey}`, auth.currentUser.uid), { timeOut: timeStr });
+                showToast("Exit log captured.", "info");
+            } catch (err) { showToast("Save error.", "error"); }
+        };
+
+        window.handleLogout = () => { if(confirm("End session?")) signOut(auth); };
+        
+        document.getElementById('attendance-search').addEventListener('input', () => updateGlobalRegistry(auth.currentUser));
+
+    </script>
+
+    <script>
+        // UI Helpers
+        window.videoStream = null;
+        window.signatureCtx = null;
+        window.isDrawing = false;
+
+        function initUI() {
             lucide.createIcons();
             updateClock();
             setInterval(updateClock, 1000);
-            renderAttendance();
-            updateStats();
-            setupSignaturePad();
         }
 
         function updateClock() {
             const now = new Date();
-            document.getElementById('live-clock').innerText = now.toLocaleTimeString();
-            document.getElementById('live-date').innerText = now.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            const c = document.getElementById('live-clock');
+            const d = document.getElementById('live-date');
+            if(c) c.innerText = now.toLocaleTimeString();
+            if(d) d.innerText = now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('-translate-x-full');
+            document.getElementById('sidebar-overlay').classList.toggle('hidden');
+        }
+
+        function showPage(id) {
+            ['dashboard', 'attendance', 'history'].forEach(p => {
+                const el = document.getElementById(`page-${p}`);
+                if(el) el.classList.add('hidden');
+            });
+            document.getElementById(`page-${id}`).classList.remove('hidden');
+            document.getElementById('page-title').innerText = id.charAt(0).toUpperCase() + id.slice(1);
+            if (window.innerWidth < 768) toggleSidebar();
+            lucide.createIcons();
+        }
+
+        window.startCamera = async () => {
+            const v = document.getElementById('webcam');
+            try {
+                window.videoStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
+                v.srcObject = window.videoStream;
+            } catch (e) { showToast("Identity sensor obstructed.", "error"); }
+        };
+
+        document.getElementById('capture-btn').onclick = () => {
+            const v = document.getElementById('webcam');
+            const c = document.getElementById('photo-canvas');
+            const p = document.getElementById('photo-preview');
+            c.width = v.videoWidth; c.height = v.videoHeight;
+            c.getContext('2d').drawImage(v, 0, 0);
+            p.src = c.toDataURL('image/jpeg');
+            p.classList.remove('hidden');
+        };
+
+        window.setupSignaturePad = () => {
+            const canvas = document.getElementById('signature-pad');
+            const box = canvas.getBoundingClientRect();
+            canvas.width = box.width; canvas.height = box.height;
+            window.signatureCtx = canvas.getContext('2d');
+            window.signatureCtx.strokeStyle = "#1e293b"; window.signatureCtx.lineWidth = 3; window.signatureCtx.lineCap = "round";
+
+            const getPos = (e) => {
+                const r = canvas.getBoundingClientRect();
+                return { x: (e.clientX || e.touches[0].clientX) - r.left, y: (e.clientY || e.touches[0].clientY) - r.top };
+            };
+            canvas.onmousedown = (e) => { window.isDrawing = true; window.signatureCtx.beginPath(); const p = getPos(e); window.signatureCtx.moveTo(p.x, p.y); };
+            canvas.onmousemove = (e) => { if(window.isDrawing) { const p = getPos(e); window.signatureCtx.lineTo(p.x, p.y); window.signatureCtx.stroke(); } };
+            window.onmouseup = () => window.isDrawing = false;
+            canvas.ontouchstart = (e) => { e.preventDefault(); window.isDrawing = true; window.signatureCtx.beginPath(); const p = getPos(e); window.signatureCtx.moveTo(p.x, p.y); };
+            canvas.ontouchmove = (e) => { e.preventDefault(); if(window.isDrawing) { const p = getPos(e); window.signatureCtx.lineTo(p.x, p.y); window.signatureCtx.stroke(); } };
+            canvas.ontouchend = () => window.isDrawing = false;
+        };
+
+        window.closeModal = () => {
+            document.getElementById('verify-modal').classList.add('hidden');
+            if(window.videoStream) window.videoStream.getTracks().forEach(t => t.stop());
+            document.getElementById('photo-preview').classList.add('hidden');
+            const c = document.getElementById('signature-pad');
+            c.getContext('2d').clearRect(0,0,c.width,c.height);
+        };
+
+        function showToast(msg, type) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const icons = { success: 'check-circle', error: 'x-circle', warning: 'alert-triangle', info: 'info' };
+            const bg = { success: 'bg-emerald-600', error: 'bg-rose-600', info: 'bg-slate-900' };
+            toast.className = `notification p-5 rounded-[1.5rem] text-white text-xs font-bold shadow-2xl flex items-center gap-4 pointer-events-auto ${bg[type] || bg.info}`;
+            toast.innerHTML = `<i data-lucide="${icons[type] || 'info'}" class="w-5 h-5"></i> <span>${msg}</span>`;
+            container.appendChild(toast);
+            lucide.createIcons();
+            setTimeout(() => toast.remove(), 4000);
         }
 
         function toggleDarkMode() {
@@ -573,347 +736,7 @@
             icon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
             lucide.createIcons();
         }
-
-        // Fixed Mobile Navigation
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            const isHidden = sidebar.classList.contains('-translate-x-full');
-            
-            if (isHidden) {
-                sidebar.classList.remove('-translate-x-full');
-                overlay.classList.remove('hidden');
-            } else {
-                sidebar.classList.add('-translate-x-full');
-                overlay.classList.add('hidden');
-            }
-        }
-
-        function showPage(pageId) {
-            ['dashboard', 'attendance', 'history'].forEach(p => document.getElementById(`page-${p}`).classList.add('hidden'));
-            document.getElementById(`page-${pageId}`).classList.remove('hidden');
-            document.getElementById('page-title').innerText = pageId.charAt(0).toUpperCase() + pageId.slice(1);
-            
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('sidebar-active', 'text-gray-500');
-                if (btn.innerText.toLowerCase().includes(pageId)) btn.classList.add('sidebar-active');
-                else btn.classList.add('text-gray-500');
-            });
-
-            if (pageId === 'history') renderHistory();
-            
-            // Close sidebar on mobile after navigation
-            if (window.innerWidth < 768) {
-                toggleSidebar();
-            }
-
-            lucide.createIcons();
-        }
-
-        function renderAttendance(filter = 'all', searchQuery = '') {
-            const tbody = document.getElementById('attendance-table-body');
-            tbody.innerHTML = '';
-
-            attendanceState.records.filter(member => {
-                const matchesSearch = member.name.toLowerCase().includes(searchQuery.toLowerCase()) || member.id.toLowerCase().includes(searchQuery.toLowerCase());
-                if (!matchesSearch) return false;
-                if (filter === 'all') return true;
-                return member.status.toLowerCase() === filter;
-            }).forEach(member => {
-                const row = document.createElement('tr');
-                row.className = "hover:bg-slate-50/50 dark:hover:bg-slate-900/40 transition-all group";
-                
-                let statusBadge = 'bg-slate-100 text-slate-500';
-                if (member.status === 'Present') statusBadge = 'bg-emerald-100 text-emerald-600 dark:bg-emerald-500/10';
-                if (member.status === 'Late') statusBadge = 'bg-amber-100 text-amber-600 dark:bg-amber-500/10';
-                
-                const cinDisabled = member.status !== 'Absent' ? 'opacity-20 grayscale pointer-events-none' : 'text-emerald-500 hover:scale-125';
-                const coutDisabled = (member.status === 'Absent' || member.timeOut !== '--:--') ? 'opacity-20 grayscale pointer-events-none' : 'text-rose-500 hover:scale-125';
-
-                row.innerHTML = `
-                    <td class="py-6 px-6 flex items-center gap-4">
-                        <img src="${member.photo}" class="w-10 h-10 rounded-xl border-2 border-white dark:border-slate-800 shadow-sm">
-                        <div>
-                            <span class="font-bold text-sm block">${member.name}</span>
-                            <span class="text-[10px] text-gray-400 font-medium">NYSC PPA</span>
-                        </div>
-                    </td>
-                    <td class="py-6 px-6 text-[11px] font-mono font-bold text-blue-500/60">${member.id}</td>
-                    <td class="py-6 px-6">
-                        <span class="px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest ${statusBadge}">${member.status}</span>
-                    </td>
-                    <td class="py-6 px-6 text-xs font-mono font-bold">${member.timeIn}</td>
-                    <td class="py-6 px-6 text-xs font-mono font-bold">${member.timeOut}</td>
-                    <td class="py-6 px-6 text-center">
-                        <div class="flex items-center justify-center gap-6">
-                            <button onclick="initiateClockIn('${member.id}')" class="${cinDisabled} transition-all" title="Clock In">
-                                <i class="bi bi-box-arrow-in-right text-2xl"></i>
-                            </button>
-                            <button onclick="clockOut('${member.id}')" class="${coutDisabled} transition-all" title="Clock Out">
-                                <i class="bi bi-box-arrow-right text-2xl"></i>
-                            </button>
-                        </div>
-                    </td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        function updateStats() {
-            const total = attendanceState.records.length;
-            const presentCount = attendanceState.records.filter(r => r.status === 'Present' || r.status === 'Late').length;
-            const lateCount = attendanceState.records.filter(r => r.status === 'Late').length;
-            const absentCount = total - presentCount;
-
-            document.getElementById('stat-total').innerText = total;
-            document.getElementById('stat-present').innerText = presentCount;
-            document.getElementById('stat-late').innerText = lateCount;
-            document.getElementById('stat-absent').innerText = absentCount;
-        }
-
-        function saveState() {
-            localStorage.setItem('ppa_attendance_v2', JSON.stringify(attendanceState));
-            updateStats();
-        }
-
-        function initiateClockIn(id) {
-            activeMemberId = id;
-            document.getElementById('verify-modal').classList.remove('hidden');
-            startCamera();
-            setTimeout(setupSignaturePad, 100);
-            lucide.createIcons();
-        }
-
-        async function startCamera() {
-            const video = document.getElementById('webcam');
-            try {
-                videoStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
-                video.srcObject = videoStream;
-            } catch (err) {
-                showToast("Identity sensor obstructed.", "error");
-            }
-        }
-
-        document.getElementById('capture-btn').addEventListener('click', function() {
-            const video = document.getElementById('webcam');
-            const canvas = document.getElementById('photo-canvas');
-            const preview = document.getElementById('photo-preview');
-            const tag = document.getElementById('wrong-identity-tag');
-            
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            canvas.getContext('2d').drawImage(video, 0, 0);
-            
-            capturedPhoto = canvas.toDataURL('image/jpeg');
-            preview.src = capturedPhoto;
-            preview.classList.remove('hidden');
-            
-            if (Math.random() > 0.95) {
-                tag.classList.remove('hidden');
-                showToast("Identity Recognition Failure.", "warning");
-            } else {
-                tag.classList.add('hidden');
-            }
-        });
-
-        function setupSignaturePad() {
-            const canvas = document.getElementById('signature-pad');
-            if (!canvas) return;
-            
-            signatureCtx = canvas.getContext('2d');
-            
-            const setCtxProps = () => {
-                signatureCtx.strokeStyle = "#1e293b";
-                signatureCtx.lineWidth = 3;
-                signatureCtx.lineCap = "round";
-            };
-            
-            const resize = () => {
-                const box = canvas.getBoundingClientRect();
-                if (canvas.width !== box.width || canvas.height !== box.height) {
-                    canvas.width = box.width;
-                    canvas.height = box.height;
-                    setCtxProps();
-                }
-            };
-
-            window.removeEventListener('resize', resize);
-            window.addEventListener('resize', resize);
-            resize();
-
-            const getPos = (e) => {
-                const rect = canvas.getBoundingClientRect();
-                return {
-                    x: (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left,
-                    y: (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top
-                };
-            };
-
-            const start = (e) => { isDrawing = true; signatureCtx.beginPath(); const p = getPos(e); signatureCtx.moveTo(p.x, p.y); };
-            const move = (e) => { if(!isDrawing) return; const p = getPos(e); signatureCtx.lineTo(p.x, p.y); signatureCtx.stroke(); };
-            const stop = () => { isDrawing = false; };
-
-            canvas.onmousedown = start;
-            canvas.onmousemove = move;
-            window.onmouseup = stop;
-            
-            canvas.ontouchstart = (e) => { e.preventDefault(); start(e); };
-            canvas.ontouchmove = (e) => { e.preventDefault(); move(e); };
-            canvas.ontouchend = stop;
-        }
-
-        function clearSignature() {
-            if (signatureCtx) {
-                signatureCtx.clearRect(0, 0, signatureCtx.canvas.width, signatureCtx.canvas.height);
-            }
-        }
-
-        function confirmClockIn() {
-            if (!capturedPhoto) return showToast("Snapshot required for biometrics.", "error");
-            
-            const member = attendanceState.records.find(r => r.id === activeMemberId);
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            const isLate = (now.getHours() > 8 || (now.getHours() === 8 && now.getMinutes() > 30));
-
-            member.status = isLate ? 'Late' : 'Present';
-            member.timeIn = timeStr;
-            member.verification = {
-                photo: capturedPhoto,
-                signature: signatureCtx.canvas.toDataURL()
-            };
-
-            addNotification(`${member.name} authenticated at ${timeStr}`);
-            showToast(`${member.name} log verified.`, isLate ? "warning" : "success");
-            
-            saveState();
-            renderAttendance();
-            closeModal();
-        }
-
-        function clockOut(id) {
-            const member = attendanceState.records.find(r => r.id === id);
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            
-            if (now.getHours() < 16) {
-                if(!confirm("Warning: Early departure detected. Ministry records will be flagged. Continue?")) return;
-            }
-
-            member.timeOut = timeStr;
-            addNotification(`${member.name} exit log saved.`);
-            showToast("Exit log captured.", "info");
-            
-            saveState();
-            renderAttendance();
-        }
-
-        function closeModal() {
-            document.getElementById('verify-modal').classList.add('hidden');
-            if (videoStream) {
-                videoStream.getTracks().forEach(track => track.stop());
-                videoStream = null;
-            }
-            document.getElementById('photo-preview').classList.add('hidden');
-            capturedPhoto = null;
-            clearSignature();
-        }
-
-        function showToast(msg, type = "info") {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            const icons = { success: 'check-circle', error: 'x-circle', warning: 'alert-triangle', info: 'info' };
-            const bg = { success: 'bg-emerald-600', error: 'bg-rose-600', warning: 'bg-amber-500', info: 'bg-slate-900' };
-            
-            toast.className = `notification p-5 rounded-[1.5rem] text-white text-xs font-bold shadow-2xl flex items-center gap-4 pointer-events-auto ${bg[type]}`;
-            toast.innerHTML = `<i data-lucide="${icons[type]}" class="w-5 h-5"></i> <span>${msg}</span>`;
-            container.appendChild(toast);
-            lucide.createIcons();
-            setTimeout(() => toast.remove(), 4000);
-        }
-
-        function addNotification(msg) {
-            const list = document.getElementById('notifications-list');
-            const div = document.createElement('div');
-            div.className = "flex gap-4 p-4 bg-white dark:bg-slate-900/50 rounded-2xl border border-gray-100 dark:border-slate-800 transition-all hover:scale-105";
-            div.innerHTML = `<div class="w-2 h-2 mt-2 rounded-full bg-blue-500 shadow-lg shadow-blue-500"></div><p class="text-xs font-medium">${msg}</p>`;
-            list.prepend(div);
-            if (list.children.length > 4) list.lastElementChild.remove();
-        }
-
-        function renderHistory() {
-            const tbody = document.getElementById('history-table-body');
-            tbody.innerHTML = '';
-            
-            const parseDate = (dStr) => {
-                const parts = dStr.split('/');
-                if (parts.length === 3) {
-                    // Assuming DD/MM/YYYY
-                    return new Date(parts[2], parts[1] - 1, parts[0]).getTime();
-                }
-                return new Date(dStr).getTime() || 0;
-            };
-
-            const allHistory = [
-                ...attendanceState.records.filter(r => r.status !== 'Absent').map(r => ({...r, date: attendanceState.today})),
-                ...attendanceState.history
-            ].sort((a,b) => parseDate(b.date) - parseDate(a.date));
-
-            allHistory.forEach(h => {
-                const tr = document.createElement('tr');
-                tr.className = "border-b dark:border-slate-800 hover:bg-slate-50/50 dark:hover:bg-slate-900/40";
-                tr.innerHTML = `
-                    <td class="py-5 px-6 font-bold text-[10px] text-gray-400">${h.date}</td>
-                    <td class="py-5 px-6 font-bold text-sm">${h.name}</td>
-                    <td class="py-5 px-6 font-mono font-bold">${h.timeIn}</td>
-                    <td class="py-5 px-6 font-mono font-bold">${h.timeOut}</td>
-                    <td class="py-5 px-6"><span class="text-[9px] px-2 py-1 rounded-md font-black uppercase tracking-tighter ${h.status === 'Late' ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'}">${h.status}</span></td>
-                    <td class="py-5 px-6">
-                        <div class="flex gap-2">
-                            ${h.verification ? `<img src="${h.verification.photo}" class="w-8 h-8 rounded-lg border-2 border-white shadow-sm cursor-pointer hover:scale-110 transition-transform" onclick="window.open(this.src)">` : '<i class="bi bi-person-bounding-box text-gray-300"></i>'}
-                            ${h.verification ? `<img src="${h.verification.signature}" class="w-8 h-8 rounded-lg bg-white border shadow-sm cursor-pointer hover:scale-110 transition-transform" onclick="window.open(this.src)">` : ''}
-                        </div>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-            lucide.createIcons();
-        }
-
-        function filterAttendance(type, event) {
-            const btns = document.querySelectorAll('#page-attendance button');
-            btns.forEach(b => {
-                b.classList.remove('bg-slate-900', 'text-white', 'dark:bg-white', 'dark:text-slate-900');
-                b.classList.add('bg-white', 'text-gray-500', 'dark:bg-slate-800');
-            });
-            
-            const currentBtn = event.currentTarget;
-            currentBtn.classList.remove('bg-white', 'text-gray-500');
-            currentBtn.classList.add('bg-slate-900', 'text-white', 'dark:bg-white', 'dark:text-slate-900');
-            
-            renderAttendance(type, document.getElementById('attendance-search').value);
-        }
-
-        document.getElementById('attendance-search').addEventListener('input', (e) => {
-            renderAttendance('all', e.target.value);
-        });
-
-        function exportToCSV() {
-            let csv = "Date,Name,CDS ID,Time In,Time Out,Status\n";
-            attendanceState.history.forEach(h => {
-                csv += `${h.date},${h.name},${h.id},${h.timeIn},${h.timeOut},${h.status}\n`;
-            });
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `Ministry_Audit_${new Date().toISOString().split('T')[0]}.csv`;
-            a.click();
-        }
-
-        function logout() {
-            if(confirm("Log out of secure session?")) location.reload();
-        }
+        window.onload = () => lucide.createIcons();
     </script>
 </body>
 </html>
