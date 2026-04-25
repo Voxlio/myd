@@ -221,34 +221,42 @@
         </div>
     </div>
 
+    <!-- Mobile Sidebar Overlay -->
+    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-slate-950/50 backdrop-blur-sm z-40 hidden md:hidden no-print"></div>
+
     <!-- Main Dashboard Application -->
     <div id="main-app" class="hidden flex h-screen overflow-hidden">
         
         <!-- Sidebar -->
-        <aside class="w-72 glass hidden md:flex flex-col border-r border-gray-200/50 dark:border-slate-800/50 no-print">
+        <aside id="sidebar" class="w-72 glass fixed inset-y-0 left-0 z-50 transform -translate-x-full md:translate-x-0 md:relative md:flex flex-col border-r border-gray-200/50 dark:border-slate-800/50 no-print transition-transform duration-300">
             <div class="p-8">
-                <div class="flex items-center gap-4 mb-12">
-                    <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/10 overflow-hidden border border-gray-100">
-                        <img src="https://scontent-los4-1.xx.fbcdn.net/v/t39.30808-1/470239024_446230785207752_4513787542505772452_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=106&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=Muril85GxBsQ7kNvwFWCn5T&_nc_oc=AdqBfSOJLpSRgfhIax8BrTWPKFE4Z9ztN5DvPV3JlKvcirA1QLbD-d-YW-95k_4hl3kYa7YWf4X3wz-NSUnSJT8n&_nc_zt=24&_nc_ht=scontent-los4-1.xx&_nc_gid=Tx4tkxwgB7qunPrAmNZeNg&_nc_ss=78289&oh=00_Af23bW-RJuYAwzzsngIr1HuJazf009-rGpb3ESyh8moOvg&oe=69F1E633" 
-                             alt="PPA Logo" 
-                             class="w-full h-full object-cover">
+                <div class="flex items-center justify-between mb-12">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/10 overflow-hidden border border-gray-100">
+                            <img src="https://scontent-los4-1.xx.fbcdn.net/v/t39.30808-1/470239024_446230785207752_4513787542505772452_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=106&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=Muril85GxBsQ7kNvwFWCn5T&_nc_oc=AdqBfSOJLpSRgfhIax8BrTWPKFE4Z9ztN5DvPV3JlKvcirA1QLbD-d-YW-95k_4hl3kYa7YWf4X3wz-NSUnSJT8n&_nc_zt=24&_nc_ht=scontent-los4-1.xx&_nc_gid=Tx4tkxwgB7qunPrAmNZeNg&_nc_ss=78289&oh=00_Af23bW-RJuYAwzzsngIr1HuJazf009-rGpb3ESyh8moOvg&oe=69F1E633" 
+                                 alt="PPA Logo" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-xl tracking-tight block">PPA Admin</span>
+                            <span class="text-[10px] uppercase tracking-widest text-blue-500 font-bold">Workforce Portal</span>
+                        </div>
                     </div>
-                    <div>
-                        <span class="font-extrabold text-xl tracking-tight block">PPA Admin</span>
-                        <span class="text-[10px] uppercase tracking-widest text-blue-500 font-bold">Workforce Portal</span>
-                    </div>
+                    <button onclick="toggleSidebar()" class="md:hidden p-2 text-gray-400 hover:text-red-500">
+                        <i data-lucide="x"></i>
+                    </button>
                 </div>
                 
                 <nav class="space-y-3">
-                    <button onclick="showPage('dashboard')" class="nav-btn sidebar-active w-full flex items-center gap-4 p-4 rounded-2xl transition-all group">
+                    <button onclick="showPage('dashboard')" class="nav-btn sidebar-active w-full flex items-center gap-4 p-4 rounded-2xl transition-all group text-left">
                         <i data-lucide="layout-dashboard" class="w-5 h-5"></i> 
                         <span class="font-semibold">Dashboard</span>
                     </button>
-                    <button onclick="showPage('attendance')" class="nav-btn w-full flex items-center gap-4 p-4 rounded-2xl text-gray-500 hover:bg-gray-100 dark:hover:bg-slate-800/50 transition-all">
+                    <button onclick="showPage('attendance')" class="nav-btn w-full flex items-center gap-4 p-4 rounded-2xl text-gray-500 hover:bg-gray-100 dark:hover:bg-slate-800/50 transition-all text-left">
                         <i data-lucide="calendar-check" class="w-5 h-5"></i> 
                         <span class="font-semibold">Live Attendance</span>
                     </button>
-                    <button onclick="showPage('history')" class="nav-btn w-full flex items-center gap-4 p-4 rounded-2xl text-gray-500 hover:bg-gray-100 dark:hover:bg-slate-800/50 transition-all">
+                    <button onclick="showPage('history')" class="nav-btn w-full flex items-center gap-4 p-4 rounded-2xl text-gray-500 hover:bg-gray-100 dark:hover:bg-slate-800/50 transition-all text-left">
                         <i data-lucide="history" class="w-5 h-5"></i> 
                         <span class="font-semibold">History Logs</span>
                     </button>
@@ -271,13 +279,15 @@
         <main class="flex-1 flex flex-col overflow-hidden relative">
             
             <!-- Top Header -->
-            <header class="glass h-20 flex items-center justify-between px-10 border-b border-gray-200/50 dark:border-slate-800/50 no-print">
+            <header class="glass h-20 flex items-center justify-between px-6 md:px-10 border-b border-gray-200/50 dark:border-slate-800/50 no-print">
                 <div class="flex items-center gap-4">
-                    <button class="md:hidden p-2 text-gray-600"><i data-lucide="menu"></i></button>
-                    <h2 id="page-title" class="font-bold text-2xl tracking-tight">Overview</h2>
+                    <button onclick="toggleSidebar()" class="md:hidden p-2 text-gray-600 dark:text-gray-300">
+                        <i data-lucide="menu"></i>
+                    </button>
+                    <h2 id="page-title" class="font-bold text-xl md:text-2xl tracking-tight">Overview</h2>
                 </div>
                 
-                <div class="flex items-center gap-8">
+                <div class="flex items-center gap-4 md:gap-8">
                     <div class="hidden md:flex flex-col text-right border-r pr-8 border-gray-200 dark:border-slate-800">
                         <span id="live-clock" class="font-mono font-bold text-xl text-blue-600">00:00:00</span>
                         <span id="live-date" class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Loading date...</span>
@@ -300,59 +310,59 @@
             </header>
 
             <!-- Scrollable Content Area -->
-            <div id="content-container" class="flex-1 overflow-y-auto p-6 md:p-10 custom-scrollbar">
+            <div id="content-container" class="flex-1 overflow-y-auto p-4 md:p-10 custom-scrollbar">
                 
                 <!-- Page: Dashboard -->
                 <section id="page-dashboard" class="space-y-8">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <div class="stat-card glass p-8 rounded-[2rem] border-b-4 border-blue-500">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+                        <div class="stat-card glass p-6 md:p-8 rounded-[2rem] border-b-4 border-blue-500">
                             <div class="flex justify-between items-start">
                                 <div>
                                     <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Total Corps</p>
-                                    <h3 class="text-4xl font-extrabold tracking-tighter" id="stat-total">30</h3>
+                                    <h3 class="text-3xl md:text-4xl font-extrabold tracking-tighter" id="stat-total">30</h3>
                                 </div>
-                                <div class="bg-blue-500/10 p-4 rounded-2xl text-blue-600">
-                                    <i data-lucide="users" class="w-6 h-6"></i>
+                                <div class="bg-blue-500/10 p-3 md:p-4 rounded-2xl text-blue-600">
+                                    <i data-lucide="users" class="w-5 h-5 md:w-6 md:h-6"></i>
                                 </div>
                             </div>
                         </div>
-                        <div class="stat-card glass p-8 rounded-[2rem] border-b-4 border-emerald-500">
+                        <div class="stat-card glass p-6 md:p-8 rounded-[2rem] border-b-4 border-emerald-500">
                             <div class="flex justify-between items-start">
                                 <div>
                                     <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">On Seat</p>
-                                    <h3 class="text-4xl font-extrabold tracking-tighter" id="stat-present">0</h3>
+                                    <h3 class="text-3xl md:text-4xl font-extrabold tracking-tighter" id="stat-present">0</h3>
                                 </div>
-                                <div class="bg-emerald-500/10 p-4 rounded-2xl text-emerald-600">
-                                    <i data-lucide="user-check" class="w-6 h-6"></i>
+                                <div class="bg-emerald-500/10 p-3 md:p-4 rounded-2xl text-emerald-600">
+                                    <i data-lucide="user-check" class="w-5 h-5 md:w-6 md:h-6"></i>
                                 </div>
                             </div>
                         </div>
-                        <div class="stat-card glass p-8 rounded-[2rem] border-b-4 border-amber-500">
+                        <div class="stat-card glass p-6 md:p-8 rounded-[2rem] border-b-4 border-amber-500">
                             <div class="flex justify-between items-start">
                                 <div>
                                     <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Tardy</p>
-                                    <h3 class="text-4xl font-extrabold tracking-tighter" id="stat-late">0</h3>
+                                    <h3 class="text-3xl md:text-4xl font-extrabold tracking-tighter" id="stat-late">0</h3>
                                 </div>
-                                <div class="bg-amber-500/10 p-4 rounded-2xl text-amber-600">
-                                    <i data-lucide="clock" class="w-6 h-6"></i>
+                                <div class="bg-amber-500/10 p-3 md:p-4 rounded-2xl text-amber-600">
+                                    <i data-lucide="clock" class="w-5 h-5 md:w-6 md:h-6"></i>
                                 </div>
                             </div>
                         </div>
-                        <div class="stat-card glass p-8 rounded-[2rem] border-b-4 border-rose-500">
+                        <div class="stat-card glass p-6 md:p-8 rounded-[2rem] border-b-4 border-rose-500">
                             <div class="flex justify-between items-start">
                                 <div>
                                     <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Missing</p>
-                                    <h3 class="text-4xl font-extrabold tracking-tighter" id="stat-absent">30</h3>
+                                    <h3 class="text-3xl md:text-4xl font-extrabold tracking-tighter" id="stat-absent">30</h3>
                                 </div>
-                                <div class="bg-rose-500/10 p-4 rounded-2xl text-rose-600">
-                                    <i data-lucide="user-x" class="w-6 h-6"></i>
+                                <div class="bg-rose-500/10 p-3 md:p-4 rounded-2xl text-rose-600">
+                                    <i data-lucide="user-x" class="w-5 h-5 md:w-6 md:h-6"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <div class="lg:col-span-2 glass rounded-[2.5rem] p-8">
+                        <div class="lg:col-span-2 glass rounded-[2.5rem] p-6 md:p-8">
                             <div class="flex justify-between items-center mb-8">
                                 <h4 class="font-extrabold text-xl">Attendance Pulse</h4>
                                 <div class="flex gap-2">
@@ -360,7 +370,7 @@
                                     <div class="flex items-center gap-1 text-[10px] font-bold text-gray-400"><span class="w-2 h-2 rounded-full bg-rose-500"></span> Absent</div>
                                 </div>
                             </div>
-                            <div class="h-64 flex items-end justify-between gap-6 px-4">
+                            <div class="h-64 flex items-end justify-between gap-2 sm:gap-6 px-4">
                                 <div class="w-full bg-blue-600/10 dark:bg-blue-900/20 rounded-2xl relative group" style="height: 60%"><div class="absolute inset-x-0 bottom-0 bg-blue-600 rounded-2xl h-1/2"></div></div>
                                 <div class="w-full bg-emerald-600/10 dark:bg-emerald-900/20 rounded-2xl relative" style="height: 85%"><div class="absolute inset-x-0 bottom-0 bg-emerald-600 rounded-2xl h-2/3"></div></div>
                                 <div class="w-full bg-blue-600/10 dark:bg-blue-900/20 rounded-2xl relative" style="height: 45%"><div class="absolute inset-x-0 bottom-0 bg-blue-600 rounded-2xl h-1/4"></div></div>
@@ -372,7 +382,7 @@
                                 <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
                             </div>
                         </div>
-                        <div class="glass rounded-[2.5rem] p-8">
+                        <div class="glass rounded-[2.5rem] p-6 md:p-8">
                             <h4 class="font-extrabold text-xl mb-6">Live Feed</h4>
                             <div class="space-y-6" id="notifications-list">
                                 <div class="flex gap-4 p-4 bg-white dark:bg-slate-900/50 rounded-2xl border border-gray-100 dark:border-slate-800">
@@ -386,7 +396,7 @@
 
                 <!-- Page: Attendance List -->
                 <section id="page-attendance" class="hidden space-y-8">
-                    <div class="glass p-8 rounded-[2.5rem] space-y-8">
+                    <div class="glass p-6 md:p-8 rounded-[2.5rem] space-y-8">
                         <div class="flex flex-col lg:row md:flex-row md:items-center justify-between gap-6">
                             <div class="relative w-full md:w-96">
                                 <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
@@ -422,15 +432,15 @@
 
                 <!-- Page: History -->
                 <section id="page-history" class="hidden space-y-8">
-                    <div class="glass p-8 rounded-[2.5rem] space-y-6">
-                        <div class="flex items-center justify-between">
+                    <div class="glass p-6 md:p-8 rounded-[2.5rem] space-y-6">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                             <div>
                                 <h3 class="font-extrabold text-2xl">Audit Trail</h3>
                                 <p class="text-gray-400 text-sm">Review past logs and verification artifacts.</p>
                             </div>
                             <div class="flex gap-3">
-                                <button onclick="exportToCSV()" class="flex items-center gap-2 px-5 py-3 bg-emerald-600 text-white rounded-xl font-bold text-sm hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-500/20"><i data-lucide="file-spreadsheet" class="w-4 h-4"></i>CSV</button>
-                                <button onclick="window.print()" class="flex items-center gap-2 px-5 py-3 bg-blue-600 text-white rounded-xl font-bold text-sm hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20"><i data-lucide="printer" class="w-4 h-4"></i>Print</button>
+                                <button onclick="exportToCSV()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 bg-emerald-600 text-white rounded-xl font-bold text-sm hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-500/20"><i data-lucide="file-spreadsheet" class="w-4 h-4"></i>CSV</button>
+                                <button onclick="window.print()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 bg-blue-600 text-white rounded-xl font-bold text-sm hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20"><i data-lucide="printer" class="w-4 h-4"></i>Print</button>
                             </div>
                         </div>
                         <div class="overflow-x-auto rounded-3xl border border-gray-100 dark:border-slate-800">
@@ -461,13 +471,13 @@
             </footer>
 
             <!-- Biometric / Verification Modal -->
-            <div id="verify-modal" class="fixed inset-0 z-[110] hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-6">
-                <div class="glass bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[3rem] overflow-hidden shadow-2xl flex flex-col md:flex-row border border-white/10">
-                    <div class="w-full md:w-1/2 p-10 bg-slate-50 dark:bg-slate-800/50 flex flex-col items-center">
+            <div id="verify-modal" class="fixed inset-0 z-[110] hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4 md:p-6">
+                <div class="glass bg-white dark:bg-slate-900 w-full max-w-3xl rounded-[3rem] overflow-hidden shadow-2xl flex flex-col md:flex-row border border-white/10 max-h-[90vh] overflow-y-auto custom-scrollbar">
+                    <div class="w-full md:w-1/2 p-6 md:p-10 bg-slate-50 dark:bg-slate-800/50 flex flex-col items-center">
                         <h4 class="font-extrabold text-xl mb-6 text-blue-600 flex items-center gap-2">
                             <i data-lucide="camera" class="w-5 h-5"></i> Facial Capture
                         </h4>
-                        <div class="relative w-full aspect-square bg-slate-950 rounded-[2rem] overflow-hidden mb-6 shadow-inner ring-4 ring-blue-500/10">
+                        <div class="relative w-full aspect-square max-w-[280px] md:max-w-none bg-slate-950 rounded-[2rem] overflow-hidden mb-6 shadow-inner ring-4 ring-blue-500/10">
                             <video id="webcam" autoplay playsinline class="w-full h-full object-cover scale-x-[-1]"></video>
                             <canvas id="photo-canvas" class="hidden"></canvas>
                             <img id="photo-preview" class="absolute inset-0 w-full h-full object-cover hidden">
@@ -477,10 +487,10 @@
                             <i class="bi bi-camera-fill text-lg"></i> Take Snap
                         </button>
                     </div>
-                    <div class="w-full md:w-1/2 p-10 flex flex-col">
+                    <div class="w-full md:w-1/2 p-6 md:p-10 flex flex-col">
                         <h4 class="font-extrabold text-xl mb-2">Authenticator</h4>
                         <p class="text-xs text-gray-400 mb-8 font-medium italic">Please sign inside the field to authorize the timestamp.</p>
-                        <canvas id="signature-pad" class="w-full flex-1 rounded-[2rem]"></canvas>
+                        <canvas id="signature-pad" class="w-full flex-1 min-h-[200px] rounded-[2rem]"></canvas>
                         <div class="flex gap-3 mt-8">
                             <button onclick="clearSignature()" class="flex-1 py-4 text-xs font-bold text-gray-500 bg-gray-100 dark:bg-slate-800 rounded-2xl hover:bg-gray-200 transition-all">Clear</button>
                             <button onclick="confirmClockIn()" id="submit-verify" class="flex-[2] py-4 text-xs font-bold bg-blue-600 text-white rounded-2xl shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all">Validate Entry</button>
@@ -564,6 +574,21 @@
             lucide.createIcons();
         }
 
+        // Fixed Mobile Navigation
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const isHidden = sidebar.classList.contains('-translate-x-full');
+            
+            if (isHidden) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+
         function showPage(pageId) {
             ['dashboard', 'attendance', 'history'].forEach(p => document.getElementById(`page-${p}`).classList.add('hidden'));
             document.getElementById(`page-${pageId}`).classList.remove('hidden');
@@ -576,6 +601,12 @@
             });
 
             if (pageId === 'history') renderHistory();
+            
+            // Close sidebar on mobile after navigation
+            if (window.innerWidth < 768) {
+                toggleSidebar();
+            }
+
             lucide.createIcons();
         }
 
